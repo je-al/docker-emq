@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSIONS=$(git ls-remote --tags https://github.com/emqtt/emq-relx.git | awk  '{ print $2 }' | sed 's/refs\/tags\///g' | sed 's/\^{}//g' | uniq)
+VERSIONS=$(git ls-remote --tags https://github.com/emqtt/emq-relx.git | awk  '{ print $2 }' | sed 's/refs\/tags\///g' | sed 's/\^{}//g' | uniq | rev)
 
 cat emq-docker-master/Dockerfile | sed 's/ENV EMQ_VERSION/ARG EMQ_VERSION/g' > emq-docker-master/Dockerfile.patched
 
@@ -20,6 +20,4 @@ for VERSION in ${VERSIONS} ; do \
     docker push chrisns/emq:${VERSION}
   fi
 done
-
-
 
