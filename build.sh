@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSIONS=$(git ls-remote --tags https://github.com/emqtt/emq-relx.git | awk  '{ print $2 }' | sed 's/refs\/tags\///g' | sed 's/\^{}//g' | uniq)
+VERSIONS=$(git ls-remote --tags https://github.com/emqtt/emq-relx.git | awk  '{ print $2 }' | sed 's/refs\/tags\///g' | sed 's/\^{}//g' | uniq | tail -n 1)
 REPOSITORY=${REPOSITORY:-chrisns}
 
 echo $VERSIONS
